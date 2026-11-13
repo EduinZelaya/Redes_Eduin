@@ -116,7 +116,7 @@ if enviar:
     else:
         st.info('Para obtener recomendaciones automatizadas de seguridad mediante IA, configure su GROQ_API_KEY en los secretos de Streamlit.')
 
-if df is not null:
+if df is not None:
     st.divider()
     st.write('Historial Reciente de Tráfico de Red (Dataset de Entrenamiento)')
     st.dataframe(df.head(15), use_container_width=True)
