@@ -1,0 +1,47 @@
+{
+    "nombre_modelo": "Clasificador de Conexiones de Red (SVM vs Arbol de Decision)",
+    "tipo_modelo": "Clasificacion Supervisada (Normal vs Sospechosa)",
+    "variables_entrada": [
+        "trafico_mbps",
+        "latencia_ms"
+    ],
+    "mejor_modelo_cv": "SVM RBF",
+    "resultados_prueba": {
+        "SVM Lineal": {
+            "Accuracy": 0.85,
+            "Precisión": 0.857,
+            "Recall": 0.84,
+            "F1": 0.848
+        },
+        "SVM Polinomial": {
+            "Accuracy": 0.85,
+            "Precisión": 0.872,
+            "Recall": 0.82,
+            "F1": 0.845
+        },
+        "SVM RBF": {
+            "Accuracy": 0.97,
+            "Precisión": 0.98,
+            "Recall": 0.96,
+            "F1": 0.97
+        },
+        "SVM sigmoide": {
+            "Accuracy": 0.67,
+            "Precisión": 0.689,
+            "Recall": 0.62,
+            "F1": 0.653
+        },
+        "Árbol de decisión": {
+            "Accuracy": 0.91,
+            "Precisión": 0.873,
+            "Recall": 0.96,
+            "F1": 0.914
+        }
+    },
+    "archivos_generados": [
+        "/content/models/modelos_clasificacion_conexion.pkl",
+        "/content/models/arbol_decision_conexion.pkl",
+        "/content/models/model_metadata.json",
+        "/content/outputs/desempeno_prueba.csv"
+    ]
+}
