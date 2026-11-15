@@ -3,7 +3,6 @@ import json
 import joblib
 import pandas as pd
 import streamlit as st
-from openai import OpenAI
 
 st.set_page_config(page_title='Clasificación de Conexiones', layout='centered')
 st.title('Detección de Conexiones Sospechosas - Eduin Fabricio Zelaya')
@@ -68,55 +67,8 @@ if enviar:
     
     st.markdown(f"### Diagnóstico: :{color_alerta}[{resultado_clase}]")
     st.write(f"Algoritmo utilizado: **{algoritmo}**")
-    
-    # Integración opcional con Groq API / OpenAI para dar explicación experta en seguridad de TI
-    api_key = st.secrets.get('GROQ_API_KEY', os.getenv('GROQ_API_KEY', ''))
-    
-    if api_key:
-        prompt = f'''
-        Actúa como un experto en Seguridad Informática y Administrador de Redes.
-        
-        Explica brevemente por qué una conexión con las siguientes métricas puede ser catalogada como {resultado_clase}.
-        Proporciona 3 recomendaciones de seguridad inmediatas para el equipo de TI.
-        
-        Métricas actuales:
-        - Tráfico de Red: {trafico} Mbps
-        - Latencia: {latencia} ms
-        
-        Resultado del modelo:
-        - Clasificación: {resultado_clase} (0=Normal, 1=Sospechosa)
-        - Modelo actuante: {algoritmo}
-        '''
-        
-        try:
-            client = OpenAI(
-                api_key=api_key,
-                base_url="https://api.groq.com/openai/v1"
-            )
-            
-            respuesta = client.chat.completions.create(
-                model="llama3-8b",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "Eres un asesor experto en ciberseguridad y monitorización de tráfico de red."
-                    },
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ]
-            )
-            
-            texto = respuesta.choices[0].message.content
-            st.info(texto)
-            
-        except Exception as e:
-            st.warning(f'Error al conectar con el servicio de IA: {e}')
-    else:
-        st.info('Para obtener recomendaciones automatizadas de seguridad mediante IA, configure su GROQ_API_KEY en los secretos de Streamlit.')
 
 if df is not None:
     st.divider()
     st.write('Historial Reciente de Tráfico de Red (Dataset de Entrenamiento)')
-    st.dataframe(df.head(15), use_container_width=True)
+    st.dataframe(df)
