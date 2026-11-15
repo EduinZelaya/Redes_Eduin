@@ -95,7 +95,7 @@ if enviar:
             )
             
             respuesta = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model="llama3-8b",
                 messages=[
                     {
                         "role": "system",
